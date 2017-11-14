@@ -3,6 +3,8 @@ package com.example.jokeapp.controllers;
 import com.example.jokeapp.services.IGetJoke;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JokesController {
@@ -13,8 +15,11 @@ public class JokesController {
         this.iGetJoke = iGetJoke;
     }
 
-    public String getChuckJoke(){
+    @RequestMapping({"/", ""})
+    public String getChuckJoke(Model model){
 
-        return iGetJoke.getJoke();
+        model.addAttribute("joke", iGetJoke.getJoke());
+
+        return "chucknorris";
     }
 }
